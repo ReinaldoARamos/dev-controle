@@ -11,7 +11,7 @@ export default function Home() {
   return hasContent ? (
     <div>Oi migos</div>
   ) : (
-    <div className=" w-screen items-center flex justify-center">
+    <div className=" w-screen items-center flex  mt-44 justify-center">
       <Image alt="nao há chamados" src={noContentImage} quality={100} />
     </div>
   );
