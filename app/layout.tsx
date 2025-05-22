@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
+import "@radix-ui/themes/styles.css";
+
 import "./globals.css";
 import { Header } from "./components/Header/Header";
-
+import { Theme } from "@radix-ui/themes";
 const geistSans = Inter({
   variable: "--font-inter-sans",
   subsets: ["latin"],
@@ -20,12 +22,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      		
+
       <body
         className={`${geistSans.variable} antialiased`}
       >
         <Header />
+        		<Theme>
         {children}
+             </Theme>
       </body>
+ 
     </html>
   );
 }
