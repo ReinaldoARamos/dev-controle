@@ -3,6 +3,7 @@ import { FileText, Folder, Trash } from "lucide-react";
 
 export function Tickets() {
   return (
+    
     <div className="flex items-center justify-between border-b border-gray-200 px-4 py-4 text-[16px] font-medium ">
       <Dialog.Root>
         <div className="w-1/3 truncate">Fulano da Silva</div>
@@ -24,7 +25,7 @@ export function Tickets() {
   <span className="flex justify-between w-full">
     <span>Detalhes do chamado</span>
    <Dialog.Close>
-    <button className="text-xs hover:bg-red-700 transition duration-200 hover:cursor-pointer text-white  px-4 py-1.5 bg-red-500 rounded-sm">Fechar</button>
+    <button className="text-xs hover:bg-red-700 transition duration-200 hover:cursor-pointer outline-0 text-white  px-4 py-1.5 bg-red-500 rounded-sm">Fechar</button>
     </Dialog.Close> 
   </span>
 </Dialog.Title>
