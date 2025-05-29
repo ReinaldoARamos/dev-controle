@@ -15,7 +15,7 @@ export default function Home() {
         
       <h1 className="flex w-full justify-between bg-transparent pb-7 pt-[38px]">
         <span className="text-4xl font-bold">Chamados</span>
-        <button className="rounded-sm bg-blue-500 px-8 py-[6px] font-medium leading-[150%] text-white">
+        <button className="rounded-sm bg-blue-500 px-8 py-[6px] font-medium leading-[150%] text-white transition-all duration-300 hover:bg-blue-400 hover:cursor-pointer">
           Cadastrar
         </button>
       </h1>
