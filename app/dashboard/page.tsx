@@ -1,8 +1,9 @@
 "use client";
+
+import { useState, useEffect } from "react";
+import noContentImage from "../../public/dashboard-nocontent.png";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import noContentImage from "../public/dashboard-nocontent.png";
-import { Tickets } from "./components/Tickets/Tickets";
+import { Tickets } from "../components/Tickets/Tickets";
 export default function Home() {
   const [hasContent, setHasContent] = useState<boolean>();
   useEffect(() => {
@@ -10,13 +11,8 @@ export default function Home() {
   }, []);
 
   return hasContent ? (
-    <div className="px-6 pt-9 text-black">
-      <header className="w-full rounded-lg bg-gray-900  text-white">
-        <div className="flex gap-6 py-3 pl-6">
-          <span>Chamados</span>
-          <span>Clientes</span>
-        </div>
-      </header>
+    <div className="px-6  text-black">
+        
       <h1 className="flex w-full justify-between bg-transparent pb-7 pt-[38px]">
         <span className="text-4xl font-bold">Chamados</span>
         <button className="rounded-sm bg-blue-500 px-8 py-[6px] font-medium leading-[150%] text-white">
