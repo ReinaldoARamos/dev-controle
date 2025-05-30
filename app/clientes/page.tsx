@@ -11,15 +11,17 @@ export default function Clientes() {
               </button>
             </h1>
            
-           <div className="flex  gap-3.5">
-            <ClientCard />
-              <ClientCard />
-                <ClientCard />
-                     <ClientCard />
-                     
-                
-            
-           </div>
+          <div className="grid grid-cols-5 gap-3.5">
+  <ClientCard />
+  <ClientCard />
+  <ClientCard />
+    <ClientCard />  <ClientCard />
+      <ClientCard />
+        <ClientCard />
+          <ClientCard />
+  <ClientCard />
+  <ClientCard />
+</div>
           </div>
     )
 }

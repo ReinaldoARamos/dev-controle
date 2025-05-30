@@ -1,6 +1,6 @@
 export function ClientCard() {
   return (
-    <div className="flex flex-col bg-slate-100 border text-[16px] border-slate-300 rounded-sm pl-2 p-[8.5px] w-101 gap-2.5">
+    <div className="flex flex-col bg-slate-100 border text-[16px] border-slate-300 rounded-sm pl-2 p-[8.5px] gap-2.5">
       <span>
         <b>Nome: </b>
         Lucas
