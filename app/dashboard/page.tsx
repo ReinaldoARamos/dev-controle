@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import noContentImage from "../../public/dashboard-nocontent.png";
 import Image from "next/image";
+import Link from 'next/link'
 import { Tickets } from "../components/Tickets/Tickets";
 export default function Home() {
   const [hasContent, setHasContent] = useState<boolean>();
@@ -15,9 +16,10 @@ export default function Home() {
         
       <h1 className="flex w-full justify-between bg-transparent pb-7 pt-[38px]">
         <span className="text-4xl font-bold">Chamados</span>
+      <Link href={'dashboard/new-ticket'}>
         <button className="rounded-sm bg-blue-500 px-8 py-[6px] font-medium leading-[150%] text-white transition-all duration-300 hover:bg-blue-400 hover:cursor-pointer">
           Cadastrar
-        </button>
+        </button></Link>
       </h1>
       <div className="flex items-center justify-between px-4 py-2 text-[16px] font-medium uppercase">
         <div className="w-1/3">Clientes</div>

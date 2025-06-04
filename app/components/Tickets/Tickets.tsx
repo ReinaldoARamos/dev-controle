@@ -3,7 +3,6 @@ import { FileText, Folder, Trash } from "lucide-react";
 
 export function Tickets() {
   return (
-    
     <div className="flex items-center justify-between border-b border-gray-200 px-4 py-4 text-[16px] font-medium ">
       <Dialog.Root>
         <div className="w-1/3 truncate">Fulano da Silva</div>
@@ -13,22 +12,31 @@ export function Tickets() {
         </div>
         <div className="w-[50px] text-right">
           <div className="flex gap-2.5">
-            <Trash size={24} className="text-red-500" />
+            <Trash
+             
+              size={24}
+              className="text-red-500 transition-all  hover:cursor-pointer duration-300 hover:text-red-800"
+            />
             <Dialog.Trigger>
-              <FileText size={24} className="text-blue-600" />
+              <FileText
+                size={24}
+                className="text-blue-600 hover:cursor-pointer transition-all duration-300 hover:text-blue-800"
+              />
             </Dialog.Trigger>
           </div>
         </div>
 
         <Dialog.Content maxWidth="787px">
-        <Dialog.Title className="font-bold text-2xl text-black w-full flex ">
-  <span className="flex justify-between w-full">
-    <span>Detalhes do chamado</span>
-   <Dialog.Close>
-    <button className="text-xs hover:bg-red-700 transition duration-200 hover:cursor-pointer outline-0 text-white  px-4 py-1.5 bg-red-500 rounded-sm">Fechar</button>
-    </Dialog.Close> 
-  </span>
-</Dialog.Title>
+          <Dialog.Title className="font-bold text-2xl text-black w-full flex ">
+            <span className="flex justify-between w-full">
+              <span>Detalhes do chamado</span>
+              <Dialog.Close>
+                <button className="text-xs hover:bg-red-700 transition duration-200 hover:cursor-pointer outline-0 text-white  px-4 py-1.5 bg-red-500 rounded-sm">
+                  Fechar
+                </button>
+              </Dialog.Close>
+            </span>
+          </Dialog.Title>
 
           <Dialog.Description size="2" className="pt-4 flex flex-col">
             <span className="pb-2 text-[16px]">
