@@ -14,6 +14,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Customer {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  phone      String
+  email      String
+  adress     String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  tickets Ticket[]
+  UserId  String?  @db.ObjectId
+  User    User?    @relation(fields: [UserId], references: [id])
+}
+
+model Ticket {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  status      String
+  created_at  DateTime? @default(now())
+  updated_at  DateTime? @default(now())
+  customerId  String    @db.ObjectId
+  customer    Customer  @relation(fields: [customerId], references: [id])
+
+  UserId String? @db.ObjectId
+
+  User User? @relation(fields: [UserId], references: [id])
+}
+
 model Account {
   id                 String    @id @default(auto()) @map("_id") @db.ObjectId
   userId             String    @db.ObjectId
@@ -51,6 +80,10 @@ model User {
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
+
+  tickets Ticket[]
+
+  Customer Customer[]
 }
 
 model VerificationRequest {
