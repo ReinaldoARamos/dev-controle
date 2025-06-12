@@ -34,12 +34,15 @@ export function Header() {
       )}
 
       {status === "unauthenticated" && (
-        <button onClick={handleLogin}>
+        <button
+          className="hover:text-slate-800 transition duration-300 hover:cursor-pointer"
+          onClick={handleLogin}
+        >
           <Lock size={26} color="#475569" />
         </button>
       )}
       {status === "authenticated" && (
-        <div className="flex gap-5 text-[#475569]">
+        <div className="flex gap-5 items-center text-[#475569]">
           <Link href={"/dashboard"}>
             {" "}
             <div className="cursor-pointer  hover:text-blue-600 transition duration-300">
