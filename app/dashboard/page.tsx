@@ -5,11 +5,15 @@ import noContentImage from "../../public/dashboard-nocontent.png";
 import Image from "next/image";
 import Link from 'next/link'
 import { Tickets } from "../components/Tickets/Tickets";
-export default function Home() {
+import { getServerSession } from "next-auth";
+import { authOptions } from "../lib/auth";
+export default async function Home() {
   const [hasContent, setHasContent] = useState<boolean>();
   useEffect(() => {
     setHasContent(true); // só executa uma vez após o componente montar
   }, []);
+
+  const session = await getServerSession(authOptions)
 
   return hasContent ? (
     <div className="px-6  text-black">
