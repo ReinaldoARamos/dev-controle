@@ -16,7 +16,7 @@ export default async function Home() {
  
   
   if(!session || !session.user){
-    redirect('/')
+    redirect('/dashboard')
   }
   return (
     <div className=" mt-44 flex w-screen  items-center justify-center">
