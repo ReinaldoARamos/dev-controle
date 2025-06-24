@@ -10,13 +10,8 @@ interface HomeProps {
   hasContent: boolean;
 }
 export default async function Home({ hasContent }: HomeProps) {
-  const session = await getServerSession(authOptions);
-
-  if (!session || !session.user) {
-    redirect("/dashboard");
-  }
-
-  hasContent = false
+ 
+  hasContent = true
   return hasContent ? (
     <div className="px-6  text-black">
       <h1 className="flex w-full justify-between bg-transparent pb-7 pt-[38px]">
@@ -29,7 +24,7 @@ export default async function Home({ hasContent }: HomeProps) {
       </h1>
       <div className="flex items-center justify-between px-4 py-2 text-[16px] font-medium uppercase">
         <div className="w-1/3">Clientes</div>
-        <div className="w-1/4">Data Cadastro</div>
+        <div className="w-1/4 hidden sm:flex">Data Cadastro</div>
         <div className="w-1/4">Status</div>
         <div className="w-[50px] text-right">#</div>
       </div>

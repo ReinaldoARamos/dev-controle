@@ -3,10 +3,10 @@ import { FileText, Folder, Trash } from "lucide-react";
 
 export function Tickets() {
   return (
-    <div className="flex items-center justify-between border-b border-gray-200 px-4 py-4 text-[16px] font-medium ">
+    <div className="flex items-center justify-between border-b border-gray-200 px-4 py-4 text-[16px] font-medium last:border-b-0" role="table">
       <Dialog.Root>
         <div className="w-1/3 truncate">Fulano da Silva</div>
-        <div className="w-1/4">12/05/2025</div>
+        <div className="w-1/4  hidden sm:flex">12/05/2025</div>
         <div className="w-1/4 uppercase  text-black">
           <span className="rounded-sm bg-green-500 px-4 py-[3px]">Aberto</span>
         </div>

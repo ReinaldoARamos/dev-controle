@@ -1,7 +1,15 @@
 import Link from "next/link";
 import { ClientCard } from "../components/ClientsCard/ClientCard";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "../lib/auth";
 
-export default function Clientes() {
+export default async function Clientes() {
+   const session = await getServerSession(authOptions);
+  
+    if (!session || !session.user) {
+      redirect("/dashboard");
+    }
     return (
        <div className="px-6  text-black">
               
