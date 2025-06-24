@@ -1,3 +1,35 @@
+
+
+
+import noContentImage from "../../public/dashboard-nocontent.png";
+import Image from "next/image";
+import Link from 'next/link'
+import { Tickets } from "../components/Tickets/Tickets";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../lib/auth";
+import { redirect } from "next/navigation";
+export default async function Home() {
+
+
+  const session = await  getServerSession(authOptions)
+
+ 
+  
+  if(!session || !session.user){
+    redirect('/')
+  }
+  return (
+    <div className=" mt-44 flex w-screen  items-center justify-center">
+      <Image alt="nao há chamados" src={noContentImage} quality={100} />
+    </div>
+  )
+  
+}
+
+
+
+
+/*
 "use client";
 
 import { useState, useEffect } from "react";
@@ -13,7 +45,7 @@ export default async function Home() {
     setHasContent(true); // só executa uma vez após o componente montar
   }, []);
 
-  const session = await getServerSession(authOptions)
+  const session = await  getServerSession(authOptions)
 
   return hasContent ? (
     <div className="px-6  text-black">
@@ -42,3 +74,6 @@ export default async function Home() {
     </div>
   );
 }
+
+
+* */
