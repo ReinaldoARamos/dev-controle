@@ -1,10 +1,39 @@
-'use client'
+"use client";
 import { Input } from "@/app/components/Input/Input";
 import Link from "next/link";
-import {useForm} from 'react-hook-form'
-import {z} from 'zod'
-import {zodResolver} from '@hookform/resolvers/zod'
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+ const schema = z.object({
+    //configuração do schema do zod para campos e suas validações
+    name: z.string().min(1, "o campo nome é obrigatório"),
+    email: z
+      .string()
+      .email("Digite um e-mail válido")
+      .min(1, "o e-mail é obrigatório"),
+    phone: z.string().refine(
+      (value) => {
+        return (
+          /^(?:\(\d{2}\)\s?)?\d{9}$/.test(value) ||
+          /^d{2}\s\d{9}$/.test(value) ||
+          /^\d{11}$/.test(value)
+        ); //regex para deixar o numero de telefone em um padrão recebendo o valor do campo na função anonioma
+      },
+      {
+        message: "o numero de telefone deve estar (DDD) 999999999",
+      }
+    ),
+    adress: z.string(),
+  });
+
+
+  type FormData   = z.infer<typeof schema>
 export default function NewCliente() {
+ 
+  const {register, handleSubmit, formState:{errors}} = useForm<FormData>({ //passando o formData, que tem a tipagem com base no schema
+    resolver: zodResolver(schema), //instanceamois o useform para colocar o zodresolver passando o schema
+  });
   return (
     <form className="py-12 px-6">
       <header className="flex gap-3.5  items-center pb-9">
@@ -20,18 +49,28 @@ export default function NewCliente() {
           <h3 className="text-[16px] font-medium pb-[7px]">Nome do Cliente</h3>
           <Input placeholderText="Digite o nome..." key={"Digite o nome..."} />
         </div>
-        
+
         <div className="flex gap-3 w-full ">
-             <div className="w-full">
-          <h3 className="text-[16px] font-medium pb-[7px]">Nome do Cliente</h3>
-          <Input placeholderText="Digite o nome..." key={"Digite o nome..."} />
+          <div className="w-full">
+            <h3 className="text-[16px] font-medium pb-[7px]">
+              Nome do Cliente
+            </h3>
+            <Input
+              placeholderText="Digite o nome..."
+              key={"Digite o nome..."}
+            />
+          </div>
+          <div className="w-full">
+            <h3 className="text-[16px] font-medium pb-[7px]">
+              Nome do Cliente
+            </h3>
+            <Input
+              placeholderText="Digite o nome..."
+              key={"Digite o nome..."}
+            />
+          </div>
         </div>
-           <div className="w-full">
-          <h3 className="text-[16px] font-medium pb-[7px]">Nome do Cliente</h3>
-          <Input placeholderText="Digite o nome..." key={"Digite o nome..."} />
-        </div>
-        </div>
-         <button className="bg-blue-500 text-white py-[10px] text-[16px] font-bold text-center w-full transition-all duration-300 hover:cursor-pointer hover:bg-blue-700 rounded-sm">
+        <button className="bg-blue-500 text-white py-[10px] text-[16px] font-bold text-center w-full transition-all duration-300 hover:cursor-pointer hover:bg-blue-700 rounded-sm">
           Cadastrar
         </button>
       </div>
