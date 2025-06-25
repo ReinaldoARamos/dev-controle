@@ -1,9 +1,12 @@
+'use client'
 import { Input } from "@/app/components/Input/Input";
 import Link from "next/link";
-
+import {useForm} from 'react-hook-form'
+import {z} from 'zod'
+import {zodResolver} from '@hookform/resolvers/zod'
 export default function NewCliente() {
   return (
-    <div className="py-12 px-6">
+    <form className="py-12 px-6">
       <header className="flex gap-3.5  items-center pb-9">
         <Link href={"/clientes"}>
           <button className="text-[16px] transition-all duration-300 hover:cursor-pointer hover:bg-gray-700 bg-gray-900 rounded-sm text-white  font-medium px-4  py-1.5">
@@ -32,6 +35,6 @@ export default function NewCliente() {
           Cadastrar
         </button>
       </div>
-    </div>
+    </form>
   );
 }
