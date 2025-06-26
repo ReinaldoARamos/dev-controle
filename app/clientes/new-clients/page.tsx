@@ -5,33 +5,36 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
- const schema = z.object({
-    //configuração do schema do zod para campos e suas validações
-    name: z.string().min(1, "o campo nome é obrigatório"),
-    email: z
-      .string()
-      .email("Digite um e-mail válido")
-      .min(1, "o e-mail é obrigatório"),
-    phone: z.string().refine(
-      (value) => {
-        return (
-          /^(?:\(\d{2}\)\s?)?\d{9}$/.test(value) ||
-          /^d{2}\s\d{9}$/.test(value) ||
-          /^\d{11}$/.test(value)
-        ); //regex para deixar o numero de telefone em um padrão recebendo o valor do campo na função anonioma
-      },
-      {
-        message: "o numero de telefone deve estar (DDD) 999999999",
-      }
-    ),
-    adress: z.string(),
-  });
+const schema = z.object({
+  //configuração do schema do zod para campos e suas validações
+  name: z.string().min(1, "o campo nome é obrigatório"),
+  email: z
+    .string()
+    .email("Digite um e-mail válido")
+    .min(1, "o e-mail é obrigatório"),
+  phone: z.string().refine(
+    (value) => {
+      return (
+        /^(?:\(\d{2}\)\s?)?\d{9}$/.test(value) ||
+        /^d{2}\s\d{9}$/.test(value) ||
+        /^\d{11}$/.test(value)
+      ); //regex para deixar o numero de telefone em um padrão recebendo o valor do campo na função anonioma
+    },
+    {
+      message: "o numero de telefone deve estar (DDD) 999999999",
+    }
+  ),
+  adress: z.string(),
+});
 
-
-  type FormData   = z.infer<typeof schema>
+type FormData = z.infer<typeof schema>;
 export default function NewCliente() {
- 
-  const {register, handleSubmit, formState:{errors}} = useForm<FormData>({ //passando o formData, que tem a tipagem com base no schema
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    //passando o formData, que tem a tipagem com base no schema
     resolver: zodResolver(schema), //instanceamois o useform para colocar o zodresolver passando o schema
   });
   return (
@@ -47,26 +50,47 @@ export default function NewCliente() {
       <div className="flex flex-col gap-[22px]">
         <div>
           <h3 className="text-[16px] font-medium pb-[7px]">Nome do Cliente</h3>
-          <Input placeholderText="Digite o nome..." key={"Digite o nome..."} />
+          <Input
+            name="name"
+            placeholder="Digite o nome do cliente"
+            type="text"
+            error={errors.name?.message}
+            register={register}
+          />
         </div>
 
-        <div className="flex gap-3 w-full ">
-          <div className="w-full">
-            <h3 className="text-[16px] font-medium pb-[7px]">
-              Nome do Cliente
-            </h3>
-            <Input
-              placeholderText="Digite o nome..."
-              key={"Digite o nome..."}
-            />
+        <div className="flex flex-col gap-3 w-full ">
+          <div className="flex gap-3">
+            <div className="flex-1">
+              <h3 className="text-[16px] font-medium pb-[7px]">Telefone</h3>
+              <Input
+                name="phone"
+                placeholder="Digite o telefone Ex: (48) 991142456"
+                type="text"
+                error={errors.phone?.message}
+                register={register}
+              />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-[16px] font-medium pb-[7px]">Email</h3>
+              <Input
+                name="email"
+                placeholder="Digite o email"
+                type="text"
+                error={errors.name?.message}
+                register={register}
+              />
+            </div>
           </div>
+
           <div className="w-full">
-            <h3 className="text-[16px] font-medium pb-[7px]">
-              Nome do Cliente
-            </h3>
+            <h3 className="text-[16px] font-medium pb-[7px]">Email</h3>
             <Input
-              placeholderText="Digite o nome..."
-              key={"Digite o nome..."}
+              name="agress"
+              placeholder="Digite o endereço do cliente"
+              type="text"
+              error={errors.adress?.message}
+              register={register}
             />
           </div>
         </div>
@@ -78,4 +102,3 @@ export default function NewCliente() {
   );
 }
 //pagina de criaçãop de novo cliente
-
