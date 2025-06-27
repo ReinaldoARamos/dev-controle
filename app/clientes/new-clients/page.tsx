@@ -37,8 +37,12 @@ export default function NewCliente() {
     //passando o formData, que tem a tipagem com base no schema
     resolver: zodResolver(schema), //instanceamois o useform para colocar o zodresolver passando o schema
   });
+
+  function handleRegister(data : FormData) { //tipagem do objeto do formulario e suas propriedades
+    console.log(data)
+  }
   return (
-    <form className="py-12 px-6">
+    <form className="py-12 px-6" onSubmit={handleSubmit(handleRegister)}>
       <header className="flex gap-3.5  items-center pb-9">
         <Link href={"/clientes"}>
           <button className="text-[16px] transition-all duration-300 hover:cursor-pointer hover:bg-gray-700 bg-gray-900 rounded-sm text-white  font-medium px-4  py-1.5">
@@ -86,7 +90,7 @@ export default function NewCliente() {
           <div className="w-full">
             <h3 className="text-[16px] font-medium pb-[7px]">Email</h3>
             <Input
-              name="agress"
+              name="adress"
               placeholder="Digite o endereço do cliente"
               type="text"
               error={errors.adress?.message}
@@ -94,7 +98,7 @@ export default function NewCliente() {
             />
           </div>
         </div>
-        <button className="bg-blue-500 text-white py-[10px] text-[16px] font-bold text-center w-full transition-all duration-300 hover:cursor-pointer hover:bg-blue-700 rounded-sm">
+        <button type="submit" className="bg-blue-500 text-white py-[10px] text-[16px] font-bold text-center w-full transition-all duration-300 hover:cursor-pointer hover:bg-blue-700 rounded-sm">
           Cadastrar
         </button>
       </div>
