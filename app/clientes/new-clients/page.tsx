@@ -10,6 +10,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/lib/auth";
 
    const session = await getServerSession(authOptions);
+   console.log(session?.user.id)
    const userId : string = session?.user.id
 const schema = z.object({
   //configuração do schema do zod para campos e suas validações
@@ -46,12 +47,13 @@ export default function NewCliente() {
 
   function handleRegister(data: FormData) {
     //tipagem do objeto do formulario e suas propriedades
-    const respose = api.post("api/customer", {
+    const response = api.post("api/customer", {
       name: data.name,
       phone: data.phone,
       email: data.email,
       UserId: userId //const com tipagem feito acima
     });
+console.log(response)
   }
   return (
     <form className="py-12 px-6" onSubmit={handleSubmit(handleRegister)}>
