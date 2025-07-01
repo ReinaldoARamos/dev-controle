@@ -10,7 +10,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Not authorized" }, { status: 401 });
   }
 
-  const { name, email, phone, address, UserId } = await request.json();
+  const { name, email, phone, adress, UserId } = await request.json();
 
   try {
     await PrismaClient.customer.create({
@@ -18,8 +18,8 @@ export async function POST(request: Request) {
         name,
         email,
         phone,
-        adress: address ?? "", //campo adress é opcional
-        UserId: UserId,
+        adress: adress ?? "", // <- Agora funciona corretamente
+        UserId,        // <- Certifique-se de usar `userId`, conforme seu modelo
       },
     });
 
