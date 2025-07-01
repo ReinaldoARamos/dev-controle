@@ -10,6 +10,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/lib/auth";
 
    const session = await getServerSession(authOptions);
+   const userId : string = session?.user.id
 const schema = z.object({
   //configuração do schema do zod para campos e suas validações
   name: z.string().min(1, "o campo nome é obrigatório"),
@@ -49,7 +50,7 @@ export default function NewCliente() {
       name: data.name,
       phone: data.phone,
       email: data.email,
-      UserId: session?.user.id
+      UserId: userId //const com tipagem feito acima
     });
   }
   return (
