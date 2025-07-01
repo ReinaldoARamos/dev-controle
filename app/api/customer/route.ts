@@ -18,7 +18,7 @@ export async function POST(request: Request) {
         name,
         email,
         phone,
-        adress: address ?? "", // Se o campo no schema.prisma é `adress`, deve-se usar esse nome aqui também
+        adress: address ?? "", //campo adress é opcional
         UserId: UserId,
       },
     });

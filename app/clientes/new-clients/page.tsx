@@ -4,7 +4,12 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { api } from "@/app/lib/api";
+import { email } from "zod/v4-mini";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/lib/auth";
 
+   const session = await getServerSession(authOptions);
 const schema = z.object({
   //configuração do schema do zod para campos e suas validações
   name: z.string().min(1, "o campo nome é obrigatório"),
@@ -38,8 +43,14 @@ export default function NewCliente() {
     resolver: zodResolver(schema), //instanceamois o useform para colocar o zodresolver passando o schema
   });
 
-  function handleRegister(data : FormData) { //tipagem do objeto do formulario e suas propriedades
-    console.log(data)
+  function handleRegister(data: FormData) {
+    //tipagem do objeto do formulario e suas propriedades
+    const respose = api.post("api/customer", {
+      name: data.name,
+      phone: data.phone,
+      email: data.email,
+      UserId: session?.user.id
+    });
   }
   return (
     <form className="py-12 px-6" onSubmit={handleSubmit(handleRegister)}>
@@ -98,7 +109,10 @@ export default function NewCliente() {
             />
           </div>
         </div>
-        <button type="submit" className="bg-blue-500 text-white py-[10px] text-[16px] font-bold text-center w-full transition-all duration-300 hover:cursor-pointer hover:bg-blue-700 rounded-sm">
+        <button
+          type="submit"
+          className="bg-blue-500 text-white py-[10px] text-[16px] font-bold text-center w-full transition-all duration-300 hover:cursor-pointer hover:bg-blue-700 rounded-sm"
+        >
           Cadastrar
         </button>
       </div>
