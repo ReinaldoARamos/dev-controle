@@ -28,7 +28,7 @@ const schema = z.object({
       message: "o numero de telefone deve estar (DDD) 999999999",
     }
   ),
-  address: z.string(),
+  adress: z.string(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -50,7 +50,7 @@ export function FormClient({ userId }: FormClientProps) {
       email: data.email,
 
       UserId: userId, //const com tipagem feito acima,
-      address: data.address,
+      adress: data.adress,
     });
     console.log("client cadastrado");
   }
@@ -103,7 +103,7 @@ export function FormClient({ userId }: FormClientProps) {
           <div className="w-full">
             <h3 className="text-[16px] font-medium pb-[7px]">Endereço</h3>
             <Input
-              name="address"
+              name="adress"
               placeholder="Digite o endereço do cliente"
               type="text"
               error={errors.address?.message}
