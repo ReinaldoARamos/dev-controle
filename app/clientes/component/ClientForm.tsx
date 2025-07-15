@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "@/app/lib/api";
 import Link from "next/link";
 import { Input } from "@/app/components/Input/Input";
+import { useRouter } from "next/navigation";
 
 interface FormClientProps {
   userId: string;
@@ -32,6 +33,7 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
+
 export function FormClient({ userId }: FormClientProps) {
   const {
     register,
@@ -42,17 +44,24 @@ export function FormClient({ userId }: FormClientProps) {
     resolver: zodResolver(schema), //instanceamois o useform para colocar o zodresolver passando o schema
   });
 
-  function handleRegister(data: FormData) {
-    //tipagem do objeto do formulario e suas propriedades
-    const response = api.post("/api/customer", {
-      name: data.name,
-      phone: data.phone,
-      email: data.email,
+  const router = useRouter();
 
-      UserId: userId, //const com tipagem feito acima,
-      adress: data.adress,
-    });
-    console.log("client cadastrado");
+  async function handleRegister(data: FormData) {
+    try {
+      await api.post("/api/customer", {
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        UserId: userId,
+        adress: data.adress,
+      });
+
+      console.log("cliente cadastrado");
+
+      router.push("/clientes"); //
+    } catch (err) {
+      console.error("Erro ao cadastrar:", err);
+    }
   }
   return (
     <form className="py-12 px-6" onSubmit={handleSubmit(handleRegister)}>
@@ -106,7 +115,7 @@ export function FormClient({ userId }: FormClientProps) {
               name="adress"
               placeholder="Digite o endereço do cliente"
               type="text"
-              error={errors.address?.message}
+              error={errors.adress?.message}
               register={register}
             />
           </div>
