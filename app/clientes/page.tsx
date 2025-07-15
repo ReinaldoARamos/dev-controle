@@ -4,12 +4,21 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "../lib/auth";
 
+import prismaClient from '../lib/prisma'
 export default async function Clientes() {
   const session = await getServerSession(authOptions);
 
   if (!session || !session.user) {
     redirect("/dashboard");
   }
+
+  const custumer = await prismaClient.customer.findMany({
+    where: {
+      UserId: session.user.id
+    }
+  })
+
+  console.log(custumer)
   return (
     <div className="px-6  text-black">
       <h1 className="flex w-full justify-between bg-transparent pb-7 pt-[38px]">
@@ -22,15 +31,10 @@ export default async function Clientes() {
       </h1>
 
       <div className="grid grid-cols-5 gap-3.5">
-        <ClientCard />
-        <ClientCard />
-        <ClientCard />
-        <ClientCard /> 
-        <ClientCard />
-        <ClientCard />
-        <ClientCard />
-        <ClientCard />
-        <ClientCard />
+      {custumer.map(custumer => (
+          <ClientCard key={custumer.id} custumer={custumer}  />
+      ))}
+      
       </div>
     </div>
   );
