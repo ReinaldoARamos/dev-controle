@@ -1,6 +1,6 @@
 import { authOptions } from "@/app/lib/auth";
 import { getServerSession } from "next-auth";
-
+import PrismaClient from "../../lib/prisma";
 import Link from "next/link";
 import {redirect} from 'next/navigation'
 export  default async function NewTicket() {
@@ -10,6 +10,12 @@ export  default async function NewTicket() {
   if(!session || !session.user) {
     redirect("/")
   }
+
+  const customers = await PrismaClient.customer.findMany({
+    where: {
+      UserId: session.user.id
+    }
+  })
   return (
     <div className="py-12 px-6">
       <header className="flex gap-3.5  items-center pb-9">
@@ -39,15 +45,20 @@ export  default async function NewTicket() {
           ></textarea>
         </div>
 
-        <div>
+        {customers.length !== 0 && (
+          <div>
           <h3 className="text-[16px] font-medium pb-[7px]">
             Selecione seu cliente
           </h3>
           <select className="text-slate-800 px-3.5 py-3 w-full border-2 resize-none border-slate-400 active:border-slate-800 transition duration-300 rounded-[5px] hover:cursor-text">
-            <option value="">Cliente 1</option>
-            <option value="">Cliente 2</option>
+           {customers.map(customer => (
+            <option key={customer.id} value={customer.id}>
+              {customer.name}
+            </option>
+           ))}
           </select>
         </div>
+        )}
         <button className="bg-blue-500 text-white py-[10px] text-[16px] font-bold text-center w-full transition-all duration-300 hover:cursor-pointer hover:bg-blue-700 rounded-sm">
           Cadastrar
         </button>
