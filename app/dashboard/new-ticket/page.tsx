@@ -1,9 +1,15 @@
-import { Input } from "@/app/components/Input/Input";
-import Link from "next/link";
-import { text } from "node:stream/consumers";
-import { RegisterOptions, UseFormRegisterReturn } from "react-hook-form";
+import { authOptions } from "@/app/lib/auth";
+import { getServerSession } from "next-auth";
 
-export default function NewTicket() {
+import Link from "next/link";
+import {redirect} from 'next/navigation'
+export  default async function NewTicket() {
+
+  const session = await getServerSession(authOptions)
+
+  if(!session || !session.user) {
+    redirect("/")
+  }
   return (
     <div className="py-12 px-6">
       <header className="flex gap-3.5  items-center pb-9">
