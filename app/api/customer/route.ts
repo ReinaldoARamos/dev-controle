@@ -13,8 +13,20 @@ export async function DELETE(request: Request) {
 
   const { searchParams } = new URL(request.url);
   const UserId = searchParams.get("id");
-  console.log("id do cliente:", UserId);
-  return NextResponse.json({ ok: true });
+
+  try {
+    await PrismaClient.customer.delete({
+      where: {
+        id: UserId as string
+      }
+    })
+    return NextResponse.json({message: "cliente deletado"})
+  } catch (error) {
+    console.log(error)
+
+  return NextResponse.json({ error: "failed do delete cliente" }, {status: 400});
+    
+  }
 }
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
