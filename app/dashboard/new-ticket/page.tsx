@@ -70,7 +70,7 @@ export default async function NewTicket() {
             </Link>
           </div>
         )}
-        <button className="bg-blue-500 text-white py-[10px] text-[16px] font-bold text-center w-full transition-all duration-300 hover:cursor-pointer hover:bg-blue-700 rounded-sm">
+        <button  disabled={customers.length === 0} className="bg-blue-500 text-white py-[10px] text-[16px] font-bold text-center w-full transition-all duration-300 hover:cursor-pointer hover:bg-blue-700 rounded-sm">
           Cadastrar
         </button>
       </form>
