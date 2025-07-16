@@ -36,6 +36,9 @@ export default async function Clientes() {
       ))}
       
       </div>
+{custumer.length === 0 &&(
+  <h1>Voce ainda não possui nenhum cliente</h1>
+)}
     </div>
   );
 }
