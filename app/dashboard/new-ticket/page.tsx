@@ -1,5 +1,7 @@
 import { Input } from "@/app/components/Input/Input";
 import Link from "next/link";
+import { text } from "node:stream/consumers";
+import { RegisterOptions, UseFormRegisterReturn } from "react-hook-form";
 
 export default function NewTicket() {
   return (
@@ -12,10 +14,15 @@ export default function NewTicket() {
         </Link>
         <span className="text-[36px] font-bold">Novo Chamado</span>
       </header>
-      <div className="flex flex-col gap-[22px]">
+      <form className="flex flex-col gap-[22px]">
         <div>
           <h3 className="text-[16px] font-medium pb-[7px]">Nome do Chamado</h3>
-          <Input placeholderText="Digite o nome..." key={"Digite o nome..."} />
+          <input
+            placeholder={"texto"}
+            type="text"
+            required
+            className="text-slate-800 px-3.5 py-3 w-full border-2 border-slate-400 active:border-slate-800 transition duration-300 rounded-[5px] hover:cursor-text"
+          />
         </div>
 
         <div>
@@ -30,12 +37,15 @@ export default function NewTicket() {
           <h3 className="text-[16px] font-medium pb-[7px]">
             Selecione seu cliente
           </h3>
-          <Input placeholderText="Selecione seu cliente..." key={"Digite o nome..."} />
+          <select className="text-slate-800 px-3.5 py-3 w-full border-2 resize-none border-slate-400 active:border-slate-800 transition duration-300 rounded-[5px] hover:cursor-text">
+            <option value="">Cliente 1</option>
+            <option value="">Cliente 2</option>
+          </select>
         </div>
         <button className="bg-blue-500 text-white py-[10px] text-[16px] font-bold text-center w-full transition-all duration-300 hover:cursor-pointer hover:bg-blue-700 rounded-sm">
           Cadastrar
         </button>
-      </div>
+      </form>
     </div>
   );
 }
