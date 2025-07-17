@@ -15,6 +15,19 @@ export default async function NewTicket() {
       UserId: session.user.id,
     },
   });
+
+ async function  handleRegisterTicket(formdata: FormData) {
+  "use server"
+
+  const name = formdata.get("name")
+  const description = formdata.get("description")
+    const custumerId = formdata.get("customer")
+
+    console.log(name)
+        console.log(description)
+            console.log(custumerId)
+}
+
   return (
     <div className="py-12 px-6">
       <header className="flex gap-3.5  items-center pb-9">
@@ -25,13 +38,14 @@ export default async function NewTicket() {
         </Link>
         <span className="text-[36px] font-bold">Novo Chamado</span>
       </header>
-      <form className="flex flex-col gap-[22px]">
+      <form className="flex flex-col gap-[22px]"  action={handleRegisterTicket}>
         <div>
           <h3 className="text-[16px] font-medium pb-[7px]">Nome do Chamado</h3>
           <input
             placeholder={"texto"}
             type="text"
             required
+            name="name"
             className="text-slate-800 px-3.5 py-3 w-full border-2 border-slate-400 active:border-slate-800 transition duration-300 rounded-[5px] hover:cursor-text"
           />
         </div>
@@ -39,6 +53,7 @@ export default async function NewTicket() {
         <div>
           <h3 className="text-[16px] font-medium pb-[7px]">Nome do Chamado</h3>
           <textarea
+          name="description"
             placeholder="Descreva o problema que está ocorrendo..."
             className="text-slate-800 px-3.5 py-3 w-full border-2 resize-none border-slate-400 active:border-slate-800 transition duration-300 rounded-[5px] hover:cursor-text"
           ></textarea>
@@ -49,7 +64,7 @@ export default async function NewTicket() {
             <h3 className="text-[16px] font-medium pb-[7px]">
               Selecione seu cliente
             </h3>
-            <select className="text-slate-800 px-3.5 py-3 w-full border-2 resize-none border-slate-400 active:border-slate-800 transition duration-300 rounded-[5px] hover:cursor-text">
+            <select name="customer" className="text-slate-800 px-3.5 py-3 w-full border-2 resize-none border-slate-400 active:border-slate-800 transition duration-300 rounded-[5px] hover:cursor-text">
               {customers.map((customer) => (
                 <option key={customer.id} value={customer.id}>
                   {customer.name}
