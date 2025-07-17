@@ -5,12 +5,21 @@ import { Tickets } from "../components/Tickets/Tickets";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../lib/auth";
 import { redirect } from "next/navigation";
-
+import PrismaClient from "../lib/prisma";
 interface HomeProps {
   hasContent: boolean;
 }
 export default async function Home({ hasContent }: HomeProps) {
- 
+
+  const session = await getServerSession(authOptions)
+
+const tickets = await  PrismaClient.ticket.findMany({
+  where: {
+    UserId: session?.user.id
+  }
+})
+
+
   hasContent = true
   return hasContent ? (
     <div className="px-6  text-black">
@@ -28,10 +37,10 @@ export default async function Home({ hasContent }: HomeProps) {
         <div className="w-1/4">Status</div>
         <div className="w-[50px] text-right">#</div>
       </div>
-      <Tickets />
-      <Tickets />
-      <Tickets />
-      <Tickets />
+{tickets.map(ticket => (
+          <Tickets  key={ticket.id} />
+      ))}
+    
     </div>
   ) : (
     <div className=" mt-44 flex w-screen  items-center justify-center">

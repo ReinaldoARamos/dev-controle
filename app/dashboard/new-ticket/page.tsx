@@ -35,7 +35,7 @@ export default async function NewTicket() {
     if (!name || !description || !custumerId) {
       return; //parar execução para nao ter itens vazios
     }
-    console.log("chamado aberto com sucesso");
+  redirect("/dashboard")
   }
 
   return (
