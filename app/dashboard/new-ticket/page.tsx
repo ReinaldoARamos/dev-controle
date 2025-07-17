@@ -52,7 +52,7 @@ export default async function NewTicket() {
         <div>
           <h3 className="text-[16px] font-medium pb-[7px]">Nome do Chamado</h3>
           <input
-            placeholder={"texto"}
+            placeholder={"Titulo"}
             type="text"
             required
             name="name"

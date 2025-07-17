@@ -1,19 +1,31 @@
+import { CustumerProps } from "@/app/utils/custumer.type";
+import { TicketsProps } from "@/app/utils/tickets.type";
 import { Button, Dialog, Text } from "@radix-ui/themes";
 import { FileText, Folder, Trash } from "lucide-react";
 
-export function Tickets() {
+interface TIcketItemProps {
+  tickets: TicketsProps;
+  customer: CustumerProps | null;
+}
+export function Tickets({ customer, tickets }: TIcketItemProps) {
   return (
-    <div className="flex items-center justify-between border-b border-gray-200 px-4 py-4 text-[16px] font-medium last:border-b-0" role="table">
+    <div
+      className="flex items-center justify-between border-b border-gray-200 px-4 py-4 text-[16px] font-medium last:border-b-0"
+      role="table"
+    >
       <Dialog.Root>
-        <div className="w-1/3 truncate">Fulano da Silva</div>
-        <div className="w-1/4  hidden sm:flex">12/05/2025</div>
+        <div className="w-1/3 truncate">{customer?.name}</div>
+        <div className="w-1/4  hidden sm:flex">
+          {tickets.created_at?.toLocaleDateString("pt-br")}
+        </div>
         <div className="w-1/4 uppercase  text-black">
-          <span className="rounded-sm bg-green-500 px-4 py-[3px]">Aberto</span>
+          <span className="rounded-sm bg-green-500 px-4 py-[3px]">
+            {tickets?.status}
+          </span>
         </div>
         <div className="w-[50px] text-right">
           <div className="flex gap-2.5">
             <Trash
-             
               size={24}
               className="text-red-500 transition-all  hover:cursor-pointer duration-300 hover:text-red-800"
             />
@@ -40,14 +52,10 @@ export function Tickets() {
 
           <Dialog.Description size="2" className="pt-4 flex flex-col">
             <span className="pb-2 text-[16px]">
-              <b>Nome: </b> Problema de computador
+              <b>Nome: </b> {tickets.name}
             </span>
             <span className="font-bold text-[16px] pt-2 pb-2">Descrição: </span>
-            <Text>
-              Lorem ipsum dolor sit amet consectetur. Duis justo nec turpis
-              iaculis in vestibulum. Scelerisque dictumst arcu aliquam lectus
-              orci blandit. Commodo sit id odio id tincidunt vestibulum.a
-            </Text>
+            <Text>{tickets.description}</Text>
           </Dialog.Description>
 
           <div className="w-full px-4 h-[1px] border border-slate-300 my-5" />
@@ -57,15 +65,15 @@ export function Tickets() {
           <div className="flex flex-col text-[16px] gap-2">
             <span>
               <b>Nome: </b>
-              Mercado Silva
+              {customer?.name}
             </span>
             <span>
               <b>Telefone: </b>
-              {`(48)9 9124-1234`}
+              {customer?.phone}
             </span>{" "}
             <span>
               <b>email: </b>
-              Teste@teste.com.br
+              {customer?.email}
             </span>
           </div>
         </Dialog.Content>

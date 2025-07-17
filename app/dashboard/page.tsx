@@ -15,7 +15,12 @@ export default async function Home({ hasContent }: HomeProps) {
 
 const tickets = await  PrismaClient.ticket.findMany({
   where: {
-    UserId: session?.user.id
+    UserId: session?.user.id,
+    status: "ABERTO",
+    
+  },
+  include: {
+    customer: true
   }
 })
 
@@ -38,7 +43,7 @@ const tickets = await  PrismaClient.ticket.findMany({
         <div className="w-[50px] text-right">#</div>
       </div>
 {tickets.map(ticket => (
-          <Tickets  key={ticket.id} />
+          <Tickets  key={ticket.id} tickets={ticket}  customer={ticket.customer} />
       ))}
     
     </div>
