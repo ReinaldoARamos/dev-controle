@@ -16,16 +16,27 @@ export default async function NewTicket() {
     },
   });
 
- async function  handleRegisterTicket(formdata: FormData) {
-  "use server"
+  async function handleRegisterTicket(formdata: FormData) {
+    "use server";
 
-  const name = formdata.get("name")
-  const description = formdata.get("description")
-    const custumerId = formdata.get("customer")
-if(!name || !description || !custumerId) {
-  return //parar execução para nao ter itens vazios
-}
-}
+    const name = formdata.get("name");
+    const description = formdata.get("description");
+    const custumerId = formdata.get("customer");
+
+    await PrismaClient.ticket.create({
+      data: {
+        name: name as string,
+        description: description as string,
+        customerId: custumerId as string,
+        status: "ABERTO",
+        UserId: session?.user.id,
+      },
+    });
+    if (!name || !description || !custumerId) {
+      return; //parar execução para nao ter itens vazios
+    }
+    console.log("chamado aberto com sucesso");
+  }
 
   return (
     <div className="py-12 px-6">
@@ -37,7 +48,7 @@ if(!name || !description || !custumerId) {
         </Link>
         <span className="text-[36px] font-bold">Novo Chamado</span>
       </header>
-      <form className="flex flex-col gap-[22px]"  action={handleRegisterTicket}>
+      <form className="flex flex-col gap-[22px]" action={handleRegisterTicket}>
         <div>
           <h3 className="text-[16px] font-medium pb-[7px]">Nome do Chamado</h3>
           <input
@@ -52,7 +63,7 @@ if(!name || !description || !custumerId) {
         <div>
           <h3 className="text-[16px] font-medium pb-[7px]">Nome do Chamado</h3>
           <textarea
-          name="description"
+            name="description"
             placeholder="Descreva o problema que está ocorrendo..."
             className="text-slate-800 px-3.5 py-3 w-full border-2 resize-none border-slate-400 active:border-slate-800 transition duration-300 rounded-[5px] hover:cursor-text"
           ></textarea>
@@ -63,7 +74,10 @@ if(!name || !description || !custumerId) {
             <h3 className="text-[16px] font-medium pb-[7px]">
               Selecione seu cliente
             </h3>
-            <select name="customer" className="text-slate-800 px-3.5 py-3 w-full border-2 resize-none border-slate-400 active:border-slate-800 transition duration-300 rounded-[5px] hover:cursor-text">
+            <select
+              name="customer"
+              className="text-slate-800 px-3.5 py-3 w-full border-2 resize-none border-slate-400 active:border-slate-800 transition duration-300 rounded-[5px] hover:cursor-text"
+            >
               {customers.map((customer) => (
                 <option key={customer.id} value={customer.id}>
                   {customer.name}
@@ -84,7 +98,10 @@ if(!name || !description || !custumerId) {
             </Link>
           </div>
         )}
-        <button  disabled={customers.length === 0} className="bg-blue-500 disabled:opacity-60 disabled:cursor-not-allowed  text-white py-[10px] text-[16px] font-bold text-center w-full transition-all duration-300 hover:cursor-pointer hover:bg-blue-700 rounded-sm">
+        <button
+          disabled={customers.length === 0}
+          className="bg-blue-500 disabled:opacity-60 disabled:cursor-not-allowed  text-white py-[10px] text-[16px] font-bold text-center w-full transition-all duration-300 hover:cursor-pointer hover:bg-blue-700 rounded-sm"
+        >
           Cadastrar
         </button>
       </form>
