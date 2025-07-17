@@ -22,10 +22,9 @@ export default async function NewTicket() {
   const name = formdata.get("name")
   const description = formdata.get("description")
     const custumerId = formdata.get("customer")
-
-    console.log(name)
-        console.log(description)
-            console.log(custumerId)
+if(!name || !description || !custumerId) {
+  return //parar execução para nao ter itens vazios
+}
 }
 
   return (
