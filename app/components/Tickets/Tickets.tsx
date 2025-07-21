@@ -1,13 +1,28 @@
+'use client'
+import { api } from "@/app/lib/api";
 import { CustumerProps } from "@/app/utils/custumer.type";
 import { TicketsProps } from "@/app/utils/tickets.type";
 import { Button, Dialog, Text } from "@radix-ui/themes";
-import { FileText, Folder, Trash } from "lucide-react";
+import { FileText, Folder, Check } from "lucide-react";
 
 interface TIcketItemProps {
   tickets: TicketsProps;
   customer: CustumerProps | null;
 }
 export function Tickets({ customer, tickets }: TIcketItemProps) {
+
+  async function handleChangeStatus() {
+    try {
+      const response = await api.patch("api/ticket", {
+        id: tickets.id
+      })
+            console.log(response.data)
+    } catch (error) {
+        console.log(error)
+    }
+
+      
+  }
   return (
     <div
       className="flex items-center justify-between border-b border-gray-200 px-4 py-4 text-[16px] font-medium last:border-b-0"
@@ -25,9 +40,10 @@ export function Tickets({ customer, tickets }: TIcketItemProps) {
         </div>
         <div className="w-[50px] text-right">
           <div className="flex gap-2.5">
-            <Trash
+            <Check
               size={24}
-              className="text-red-500 transition-all  hover:cursor-pointer duration-300 hover:text-red-800"
+              className="text-green-500 transition-all  hover:cursor-pointer duration-300 hover:text-red-800"
+              onClick={handleChangeStatus}
             />
             <Dialog.Trigger>
               <FileText
