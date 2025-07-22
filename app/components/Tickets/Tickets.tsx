@@ -90,6 +90,14 @@ export function Tickets({ customer, tickets }: TIcketItemProps) {
               <b>email: </b>
               {customer?.email}
             </span>
+            {customer?.adress ? (
+              <span>
+                <b>Endereço: </b>
+                {customer?.adress}
+              </span>
+            ) : (
+              <></>
+            )}
           </div>
         </Dialog.Content>
       </Dialog.Root>

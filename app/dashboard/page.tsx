@@ -18,6 +18,9 @@ export default async function Home() {
     include: {
       customer: true,
     },
+    orderBy : {
+      created_at: "desc"
+    }
   });
 
   return tickets.length != 0 ? (
