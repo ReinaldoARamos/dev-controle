@@ -20,8 +20,26 @@ const findTicket = await PrismaClient.ticket.findFirst({
     }
 })
 
-console.log(findTicket)
+if(!findTicket) {
+    return NextResponse.json({error: "ticket not found"}, {status: 400})
+}
 
-return NextResponse.json({ message: "teste chamado" });
+
+    try {
+    await PrismaClient.ticket.update({
+        where: {
+            id: id as string
+        },
+        data: {
+            status: "FECHADO"
+        }
+       
+    });
+
+    return NextResponse.json({ message: "Ticket atualizado com sucesso" });
+} catch (error) {
+    console.log(error);
+    return NextResponse.json({ error: "Failed to update ticket" }, { status: 400 });
+}
 
 }

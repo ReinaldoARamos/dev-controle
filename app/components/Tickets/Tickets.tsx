@@ -1,27 +1,26 @@
-'use client'
+"use client";
 import { api } from "@/app/lib/api";
 import { CustumerProps } from "@/app/utils/custumer.type";
 import { TicketsProps } from "@/app/utils/tickets.type";
 import { Button, Dialog, Text } from "@radix-ui/themes";
 import { FileText, Folder, Check } from "lucide-react";
-
+import { useRouter } from "next/navigation";
 interface TIcketItemProps {
   tickets: TicketsProps;
   customer: CustumerProps | null;
 }
 export function Tickets({ customer, tickets }: TIcketItemProps) {
-
+  const router = useRouter();
   async function handleChangeStatus() {
     try {
       const response = await api.patch("api/ticket", {
-        id: tickets.id
-      })
-            console.log(response.data)
-    } catch (error) {
-        console.log(error)
-    }
+        id: tickets.id,
+      });
 
-      
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <div
