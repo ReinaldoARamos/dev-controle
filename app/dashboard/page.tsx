@@ -6,10 +6,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../lib/auth";
 import { redirect } from "next/navigation";
 import PrismaClient from "../lib/prisma";
-interface HomeProps {
-  hasContent: boolean;
-}
-export default async function Home({ hasContent }: HomeProps) {
+
+export default async function Home() {
   const session = await getServerSession(authOptions);
 
   const tickets = await PrismaClient.ticket.findMany({
@@ -22,7 +20,6 @@ export default async function Home({ hasContent }: HomeProps) {
     },
   });
 
-  hasContent = true;
   return tickets.length != 0 ? (
     <div className="px-6  text-black">
       <h1 className="flex w-full justify-between bg-transparent pb-7 pt-[38px]">
