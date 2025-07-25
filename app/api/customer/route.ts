@@ -57,3 +57,13 @@ export async function POST(request: Request) {
     );
   }
 }
+
+
+export async function GET(request: Request) {
+  const {searchParams} = new URL(request.url) //URL para pegar o email
+  const customerEmail = searchParams.get("email") //get no email que sera enviado como parametro na URL
+
+  console.log("EMAIL RECEBIDO ", customerEmail)
+
+  return NextResponse.json({message: "RECEBIDO"})
+}
