@@ -46,7 +46,7 @@ export function FormTicket() {
       )}
       <button
         type="submit"
-        className="bg-blue -500 rounded-md w-full h-11 px-2 text-white font-bold"
+        className="bg-blue-500 rounded-md w-full h-11 px-2 text-white font-bold"
       >
         Cadastrar
       </button>

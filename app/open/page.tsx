@@ -47,6 +47,7 @@ export default function OpenTicket() {
           email: data.email //parametro passado pela rota
         }
       })
+      console.log(response.data)
 
   }
   return (
