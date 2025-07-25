@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Search, X } from "lucide-react";
 import { useState } from "react";
+import { FormTicket } from "./components/FormTicket";
 const schema = z.object({
   email: z
     .string()
@@ -71,6 +72,8 @@ export default function OpenTicket() {
             </button>
           </form>
         )}
+
+     {customer != null &&     <FormTicket />}
       </main>
     </div>
   );
