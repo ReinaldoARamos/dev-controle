@@ -4,7 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Search, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormTicket } from "./components/FormTicket";
 import { api } from "../lib/api";
 const schema = z.object({
@@ -20,18 +20,19 @@ interface CustomerDataInfo {
 }
 type FormData = z.infer<typeof schema>;
 export default function OpenTicket() {
-  const [customer, setCustomer] = useState<CustomerDataInfo | null>({
-    id: "oi",
-    name: "jose",
-  });
+  const [customer, setCustomer] = useState<CustomerDataInfo | null>(null);
+
+ 
 
   function handleClearCustomer() {
     setCustomer(null);
     setValue("email", "");
   }
-  /*
-  const [customer, setCustomer] = useState<CustomerDataInfo | null>(null);
-  */
+
+
+  
+
+
   const {
     register,
     setValue,
@@ -42,12 +43,20 @@ export default function OpenTicket() {
   });
 
   async function handleSearchCustomer(data: FormData) { 
+
+    
       const response = await api.get("api/customer", {
         params: {
           email: data.email //parametro passado pela rota
         }
       })
-      console.log(response.data)
+    
+ setCustomer({
+      id: response.data.id,
+      name: response.data.name
+     })
+
+
 
   }
   return (
@@ -62,7 +71,7 @@ export default function OpenTicket() {
             </p>
             <button
               className=" h-11 hover:cursor-pointer px-2 flex items-center justify-center rounded "
-              onClick={handleClearCustomer}
+             onClick={handleClearCustomer}
             >
               <X size={30} color="red" />
             </button>

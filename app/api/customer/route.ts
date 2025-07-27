@@ -61,21 +61,29 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url); //URL para pegar o email
-  const customerEmail = searchParams.get("email"); //get no email que sera enviado como parametro na URL
+  const { searchParams } = new URL(request.url);
+  const customerEmail = searchParams.get("email");
 
-  if(!customerEmail || customerEmail === "") {
-    return NextResponse.json({ error: "Customer nod found" }, { status: 400 });
+  if (!customerEmail || customerEmail === "") {
+    return NextResponse.json({ error: "Customer not found" }, { status: 400 });
   }
+
   try {
     const customer = await PrismaClient.customer.findFirst({
       where: {
         email: customerEmail as string,
       },
     });
-  } catch (error) {
-    return NextResponse.json({ error: "Customer nod found" }, { status: 400 });
-  }
 
-  return NextResponse.json({ message: "RECEBIDO" });
+    console.log("CLIENTE", customer);
+
+    if (!customer) {
+      return NextResponse.json({ error: "Customer not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(customer);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Customer not found" }, { status: 400 });
+  }
 }
