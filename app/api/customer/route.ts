@@ -17,15 +17,17 @@ export async function DELETE(request: Request) {
   try {
     await PrismaClient.customer.delete({
       where: {
-        id: UserId as string
-      }
-    })
-    return NextResponse.json({message: "cliente deletado"})
+        id: UserId as string,
+      },
+    });
+    return NextResponse.json({ message: "cliente deletado" });
   } catch (error) {
-    console.log(error)
+    console.log(error);
 
-  return NextResponse.json({ error: "failed do delete cliente" }, {status: 400});
-    
+    return NextResponse.json(
+      { error: "failed do delete cliente" },
+      { status: 400 }
+    );
   }
 }
 export async function POST(request: Request) {
@@ -58,12 +60,22 @@ export async function POST(request: Request) {
   }
 }
 
-
 export async function GET(request: Request) {
-  const {searchParams} = new URL(request.url) //URL para pegar o email
-  const customerEmail = searchParams.get("email") //get no email que sera enviado como parametro na URL
+  const { searchParams } = new URL(request.url); //URL para pegar o email
+  const customerEmail = searchParams.get("email"); //get no email que sera enviado como parametro na URL
 
-  console.log("EMAIL RECEBIDO ", customerEmail)
+  if(!customerEmail || customerEmail === "") {
+    return NextResponse.json({ error: "Customer nod found" }, { status: 400 });
+  }
+  try {
+    const customer = await PrismaClient.customer.findFirst({
+      where: {
+        email: customerEmail as string,
+      },
+    });
+  } catch (error) {
+    return NextResponse.json({ error: "Customer nod found" }, { status: 400 });
+  }
 
-  return NextResponse.json({message: "RECEBIDO"})
+  return NextResponse.json({ message: "RECEBIDO" });
 }
