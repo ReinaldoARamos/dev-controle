@@ -12,11 +12,11 @@ const schema = z.object({
 });
 
 interface FormTickerProps {
-    customer: CustomerDataInfo
+  customer: CustomerDataInfo;
 }
 
 type FormData = z.infer<typeof schema>;
-export function FormTicket({customer}: FormTickerProps) {
+export function FormTicket({ customer }: FormTickerProps) {
   const {
     register,
     handleSubmit,
@@ -26,17 +26,20 @@ export function FormTicket({customer}: FormTickerProps) {
     resolver: zodResolver(schema),
   });
 
-
   async function handleSubmitData(data: FormData) {
-    const response = await api.post('api/ticket', {
-        name: data.name,
-        description: data.description,
-        customerId: customer.id
-    })
-    console.log(response.data);
-}
+    const response = await api.post("api/ticket", {
+      name: data.name,
+      description: data.description,
+      customerId: customer.id,
+    });
+    setValue("name", "");
+    setValue("description", "");
+  }
   return (
-    <form className="bg-slate-200  border-slate-200  mt-6 px-4 py-6 rounded border-2" onSubmit={handleSubmit(handleSubmitData)}>
+    <form
+      className="bg-slate-200  border-slate-200  mt-6 px-4 py-6 rounded border-2"
+      onSubmit={handleSubmit(handleSubmitData)}
+    >
       <label className="mb-1 font-medium text-lg">Nome do chamado</label>
       <Input
         register={register}
