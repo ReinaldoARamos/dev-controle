@@ -37,6 +37,7 @@ export default function OpenTicket() {
     register,
     setValue,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -50,7 +51,10 @@ export default function OpenTicket() {
           email: data.email //parametro passado pela rota
         }
       })
-    
+    if(response.data === null) {
+      setError("email", {type: "custom", message: "Ops, cliente nao foi encontrado"})
+      return
+    }
  setCustomer({
       id: response.data.id,
       name: response.data.name
