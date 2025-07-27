@@ -14,7 +14,7 @@ const schema = z.object({
     .min(1, "O campo email é obrigatório"),
 });
 
-interface CustomerDataInfo {
+export interface CustomerDataInfo {
   name: string;
   id: string;
 }
@@ -101,7 +101,7 @@ export default function OpenTicket() {
           </form>
         )}
 
-        {customer != null && <FormTicket />}
+        {customer != null && <FormTicket customer={customer}/> }
       </main>
     </div>
   );
