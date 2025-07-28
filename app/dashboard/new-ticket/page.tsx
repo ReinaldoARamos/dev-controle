@@ -29,7 +29,7 @@ export default async function NewTicket() {
         description: description as string,
         customerId: custumerId as string,
         status: "ABERTO",
-        UserId: session?.user.id,
+        userId: session?.user.id,
       },
     });
     if (!name || !description || !custumerId) {

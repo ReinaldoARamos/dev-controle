@@ -5,8 +5,9 @@ import { Tickets } from "../components/Tickets/Tickets";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../lib/auth";
 import { redirect } from "next/navigation";
-import PrismaClient from "../lib/prisma";
+
 import { RefreshButton } from "./components/ButtonRefresh";
+import PrismaClient from '../lib/prisma'
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
