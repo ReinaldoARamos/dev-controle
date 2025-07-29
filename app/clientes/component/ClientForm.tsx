@@ -8,7 +8,7 @@ import { Input } from "@/app/components/Input/Input";
 import { useRouter } from "next/navigation";
 
 interface FormClientProps {
-  userId: string;
+  userId: string | undefined;
 }
 const schema = z.object({
   //configuração do schema do zod para campos e suas validações
