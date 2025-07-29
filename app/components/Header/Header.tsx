@@ -17,7 +17,7 @@ export function Header() {
 
   return (
     <div className="text-black  bg-white border-[1px] border-slate-100 flex justify-between px-4  py-5">
-      <Link href={"/dashboard"}>
+      {status === "unauthenticated" && (
         <div
           className="font-bold text-2xl leading-relaxed
 "
@@ -25,7 +25,19 @@ export function Header() {
           {" "}
           <b className="text-blue-600">DEV</b> CONTROLE{" "}
         </div>
-      </Link>
+      )}
+
+      {status === "authenticated" && (
+        <Link href={"/dashboard"}>
+          <div
+            className="font-bold text-2xl leading-relaxed
+"
+          >
+            {" "}
+            <b className="text-blue-600">DEV</b> CONTROLE{" "}
+          </div>
+        </Link>
+      )}
 
       {status === "loading" && (
         <button className="animate-spin">

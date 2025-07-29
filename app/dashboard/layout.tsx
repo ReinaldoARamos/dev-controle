@@ -17,11 +17,11 @@ export const metadata: Metadata = {
 
 export default function dashBoardLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} antialiased`}>
+  
+      <main className={`${geistSans.variable} antialiased`}>
         <DashBoardMenu />
         {children}
-      </body>
-    </html>
+      </main>
+   
   );
 }

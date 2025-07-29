@@ -9,9 +9,12 @@ import { redirect } from "next/navigation";
 import { RefreshButton } from "./components/ButtonRefresh";
 import PrismaClient from "../lib/prisma";
 
-export default async function Home() {
+export default async function Dashboard() {
   const session = await getServerSession(authOptions);
 
+  if (!session || !session.user) {
+    redirect("/");
+  }
   const tickets = await PrismaClient.ticket.findMany({
     where: {
       status: "ABERTO",
