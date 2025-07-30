@@ -1,12 +1,11 @@
-    'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
-import Link from 'next/link'
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function DashBoardMenu() {
-  const pathname = usePathname()
-const isActive = (path: string) => pathname.startsWith(path)
-
+  const pathname = usePathname();
+  const isActive = (path: string) => pathname.startsWith(path);
 
   return (
     <div className="px-6 pt-9">
@@ -15,9 +14,9 @@ const isActive = (path: string) => pathname.startsWith(path)
           <Link href="/dashboard">
             <span
               className={`border-b ${
-                isActive('/dashboard')
-                  ? 'text-white border-b-white'
-                  : 'border-transparent hover:border-b-white hover:text-white cursor-pointer transition duration-300'
+                isActive("/dashboard")
+                  ? "text-white border-b-white"
+                  : "border-transparent hover:border-b-white hover:text-white cursor-pointer transition duration-300"
               }`}
             >
               Chamados
@@ -27,9 +26,9 @@ const isActive = (path: string) => pathname.startsWith(path)
           <Link href="/clientes">
             <span
               className={`border-b ${
-                isActive('/clientes')
-                  ? 'text-white border-b-white'
-                  : 'border-transparent hover:border-b-white hover:text-white cursor-pointer transition duration-300'
+                isActive("/clientes")
+                  ? "text-white border-b-white"
+                  : "border-transparent hover:border-b-white hover:text-white cursor-pointer transition duration-300"
               }`}
             >
               Clientes
@@ -38,5 +37,5 @@ const isActive = (path: string) => pathname.startsWith(path)
         </div>
       </header>
     </div>
-  )
+  );
 }
