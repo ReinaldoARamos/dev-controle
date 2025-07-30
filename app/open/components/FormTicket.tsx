@@ -64,7 +64,7 @@ export function FormTicket({ customer }: FormTickerProps) {
       )}
       <button
         type="submit"
-        className="bg-blue-500 rounded-md w-full h-11 px-2 text-white font-bold"
+        className="bg-blue-500 rounded-md w-full h-11 px-2 text-white font-bold hover:cursor-pointer hover:bg-blue-700 transition-all duration-300"
       >
         Cadastrar
       </button>

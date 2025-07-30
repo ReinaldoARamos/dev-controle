@@ -66,6 +66,7 @@ export default function OpenTicket() {
   return (
     <div className="w-full max-w-2xl mx-auto px-2 ">
       <h1 className="font-bold text-3xl text-center mt-24">Abrir Chamado</h1>
+    
       <main className="flex flex-col mt-4 mb-2">
         {customer ? (
           <div className="bg-slate-200 py-6 px-4  border-slate-200 rounded border-2 flex items-center justify-between">
@@ -82,6 +83,7 @@ export default function OpenTicket() {
           </div>
         ) : (
           <form className="bg-slate-200 py-6 px-2  border-slate-200 rounded border-2 " onSubmit={handleSubmit(handleSearchCustomer)}>
+             <h3 className="font-bold text-lg">Pesquise o e-mail do cliente</h3>
             <div className="flex flex-col gap-3">
               <Input
                 name="email"

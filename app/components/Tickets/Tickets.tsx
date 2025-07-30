@@ -3,7 +3,7 @@ import { api } from "@/app/lib/api";
 import { CustumerProps } from "@/app/utils/custumer.type";
 import { TicketsProps } from "@/app/utils/tickets.type";
 import { Button, Dialog, Text } from "@radix-ui/themes";
-import { FileText, Folder, Check } from "lucide-react";
+import { FileText, Folder, Check, RotateCcw } from "lucide-react";
 import { useRouter } from "next/navigation";
 interface TIcketItemProps {
   tickets: TicketsProps;
@@ -11,9 +11,21 @@ interface TIcketItemProps {
 }
 export function Tickets({ customer, tickets }: TIcketItemProps) {
   const router = useRouter();
-  async function handleChangeStatus() {
+  async function handleCloseTicket() {
     try {
       const response = await api.patch("api/ticket", {
+        id: tickets.id,
+      });
+
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function handleReopenTicket() {
+    try {
+      const response = await api.patch("api/openticket", {
         id: tickets.id,
       });
 
@@ -32,18 +44,34 @@ export function Tickets({ customer, tickets }: TIcketItemProps) {
         <div className="w-1/4  hidden sm:flex">
           {tickets.created_at?.toLocaleDateString("pt-br")}
         </div>
-        <div className="w-1/4 uppercase  text-black">
-          <span className="rounded-sm bg-green-500 px-4 py-[3px]">
-            {tickets?.status}
-          </span>
-        </div>
+        {tickets.status === "ABERTO" ? (
+          <div className="w-1/4 uppercase  text-black">
+            <span className="rounded-sm bg-green-500 px-4 py-[3px]">
+              {tickets?.status}
+            </span>
+          </div>
+        ) : (
+          <div className="w-1/4 uppercase  text-black">
+            <span className="rounded-sm bg-red-500 px-4 py-[3px]">
+              {tickets?.status}
+            </span>
+          </div>
+        )}
         <div className="w-[50px] text-right">
           <div className="flex gap-2.5">
-            <Check
-              size={24}
-              className="text-green-500 transition-all  hover:cursor-pointer duration-300 hover:text-red-800"
-              onClick={handleChangeStatus}
-            />
+            {tickets.status === "ABERTO" ? (
+              <Check
+                size={24}
+                className="text-green-500 transition-all  hover:cursor-pointer duration-300 hover:text-red-800"
+                onClick={handleCloseTicket}
+              />
+            ) : (
+              <RotateCcw
+                size={24}
+                className="text-green-500 transition-all  hover:cursor-pointer duration-300 hover:text-red-800"
+                onClick={handleReopenTicket}
+              />
+            )}
             <Dialog.Trigger>
               <FileText
                 size={24}

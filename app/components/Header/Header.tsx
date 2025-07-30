@@ -18,13 +18,15 @@ export function Header() {
   return (
     <div className="text-black  bg-white border-[1px] border-slate-100 flex justify-between px-4  py-5">
       {status === "unauthenticated" && (
-        <div
-          className="font-bold text-2xl leading-relaxed
+         <Link href={"/"}>
+          <div
+            className="font-bold text-2xl leading-relaxed
 "
-        >
-          {" "}
-          <b className="text-blue-600">DEV</b> CONTROLE{" "}
-        </div>
+          >
+            {" "}
+            <b className="text-blue-600">DEV</b> CONTROLE{" "}
+          </div>
+        </Link>
       )}
 
       {status === "authenticated" && (

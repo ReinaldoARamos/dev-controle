@@ -18,10 +18,17 @@ if (session ) {
         <div className=" mt-44 flex   items-center justify-center flex-col gap-2.5">
             <Image alt="nao há chamados" src={noContentImage} quality={100} />
          
-                <div className="rounded-sm text-lg items-center flex gap-3 bg-blue-500 px-8 py-[6px] font-medium leading-[150%] text-white transition-all duration-300 hover:bg-blue-400 hover:cursor-pointer" >
+               <div className="flex flex-col gap-3">
+                 <div className="rounded-sm text-lg items-center flex gap-3 bg-blue-500 px-8 py-[6px] font-medium leading-[150%] text-white transition-all duration-300 hover:bg-blue-400 hover:cursor-pointer" >
                     Faça seu login clicando no ícone  <Lock size={18} color="#FFFF" />
                 </div>
-           
+                 <Link href={'/open'}>
+                 <div className="rounded-sm text-lg items-center flex gap-3 bg-blue-500 px-8 py-[6px] font-medium leading-[150%] text-white transition-all duration-300 hover:bg-blue-400 hover:cursor-pointer" >
+                  Ou cadastre seu chamado sem login
+                </div>
+                 </Link>
+               </div>
+
         </div>
     )
 }

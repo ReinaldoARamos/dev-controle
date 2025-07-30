@@ -22,7 +22,17 @@ export default function DashBoardMenu() {
               Chamados
             </span>
           </Link>
-
+ <Link href="/closed-tickets">
+            <span
+              className={`border-b ${
+                isActive("/closed-tickets")
+                  ? "text-white border-b-white"
+                  : "border-transparent hover:border-b-white hover:text-white cursor-pointer transition duration-300"
+              }`}
+            >
+              Chamados encerrados
+            </span>
+          </Link>
           <Link href="/clientes">
             <span
               className={`border-b ${

@@ -1,7 +1,12 @@
 import { authOptions } from "@/app/lib/auth";
+import PrismaClient from "../../lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import PrismaClient from "../../lib/prisma";
+
+
+
+
+
 
 export async function PATCH(request: Request) {
   const session = await getServerSession(authOptions);
@@ -28,7 +33,7 @@ export async function PATCH(request: Request) {
         id: id as string,
       },
       data: {
-        status: "FECHADO",
+        status: "ABERTO",
       },
     });
 
@@ -41,30 +46,44 @@ export async function PATCH(request: Request) {
     );
   }
 }
+ /*
+export async function PATCH(request: Request) {
+  const session = await getServerSession(authOptions);
 
-export async function POST(request: Request) {
-  const { description, name, customerId } = await request.json();
+  if (!session || !session.user) {
+    return NextResponse.json({ error: "not authorized" }, { status: 401 });
+  }
 
-  if (!name || !description || !customerId) {
+  const { id } = await request.json();
+
+  const findTicket = await PrismaClient.ticket.findFirst({
+    where: {
+      id: id as string,
+    },
+  });
+
+  if (!findTicket) {
     return NextResponse.json(
-      { error: "erro ao cadastrar o chamado" },
+      { error: "TIcket nao encontrado" },
       { status: 400 }
     );
   }
+
   try {
-    await PrismaClient.ticket.create({
+    await PrismaClient.ticket.update({
+      where: {
+        id: id as string,
+      },
       data: {
-        name: name,
-        description: description,
-        customerId: customerId,
         status: "ABERTO",
       },
     });
   } catch (error) {
     return NextResponse.json(
-      { error: "erro ao cadastrar o chamado" },
+      { error: "Nao foi possível atualizar o status do ticket" },
       { status: 400 }
     );
   }
-  return NextResponse.json({ message: "Cadastrado" });
+    return NextResponse.json({ message: "Cadastrado" });
 }
+*/
