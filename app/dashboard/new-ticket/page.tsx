@@ -40,13 +40,13 @@ export default async function NewTicket() {
 
   return (
     <div className="py-12 px-6">
-      <header className="flex gap-3.5  items-center pb-9">
+      <header className="flex flex-col lg:flex-row sm:flex-col gap-3.5  lg:items-center pb-9">
         <Link href={"/dashboard"}>
           <button className="text-[16px] transition-all duration-300 hover:cursor-pointer hover:bg-gray-700 bg-gray-900 rounded-sm text-white  font-medium px-4  py-1.5">
             Voltar
           </button>
         </Link>
-        <span className="text-[36px] font-bold">Novo Chamado</span>
+        <span className="lg:text-[36px] text-lg font-bold">Novo Chamado</span>
       </header>
       <form className="flex flex-col gap-[22px]" action={handleRegisterTicket}>
         <div>

@@ -9,8 +9,8 @@ export default function DashBoardMenu() {
 
   return (
     <div className="px-6 pt-9">
-      <header className="w-full rounded-lg bg-gray-900 text-slate-200">
-        <div className="flex gap-6 py-3 pl-6">
+      <header className="w-full rounded-lg bg-gray-900 text-slate-200 overflow-hidden">
+        <div className="flex lg:justify-normal justify-between gap-6 lg:py-3 lg:pl-6 pr-2 pl-2 py-2">
           <Link href="/dashboard">
             <span
               className={`border-b ${
@@ -27,10 +27,10 @@ export default function DashBoardMenu() {
               className={`border-b ${
                 isActive("/closed-tickets")
                   ? "text-white border-b-white"
-                  : "border-transparent hover:border-b-white hover:text-white cursor-pointer transition duration-300"
+                  : "border-transparent  hover:border-b-white hover:text-white cursor-pointer transition duration-300"
               }`}
             >
-              Chamados encerrados
+               Encerrados
             </span>
           </Link>
           <Link href="/clientes">

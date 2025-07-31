@@ -65,13 +65,13 @@ export function FormClient({ userId }: FormClientProps) {
   }
   return (
     <form className="py-12 px-6" onSubmit={handleSubmit(handleRegister)}>
-      <header className="flex gap-3.5  items-center pb-9">
+          <header className="flex flex-col lg:flex-row sm:flex-col gap-3.5  lg:items-center pb-9">
         <Link href={"/clientes"}>
           <button className="text-[16px] transition-all duration-300 hover:cursor-pointer hover:bg-gray-700 bg-gray-900 rounded-sm text-white  font-medium px-4  py-1.5">
             Voltar
           </button>
         </Link>
-        <span className="text-[36px] font-bold">Novo Cliente</span>
+        <span className=" text-lg lg:text-[36px] font-bold">Novo Cliente</span>
       </header>
       <div className="flex flex-col gap-[22px]">
         <div>

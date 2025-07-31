@@ -45,14 +45,14 @@ export function Tickets({ customer, tickets }: TIcketItemProps) {
           {tickets.created_at?.toLocaleDateString("pt-br")}
         </div>
         {tickets.status === "ABERTO" ? (
-          <div className="w-1/4 uppercase  text-black">
-            <span className="rounded-sm bg-green-500 px-4 py-[3px]">
+          <div className="lg:w-1/4 lg:uppercase lg:text-lg text-sm text-black">
+            <span className="rounded-sm lowercase bg-green-500 px-4 py-[3px]">
               {tickets?.status}
             </span>
           </div>
         ) : (
-          <div className="w-1/4 uppercase  text-black">
-            <span className="rounded-sm bg-red-500 px-4 py-[3px]">
+  <div className="lg:w-1/4 lg:uppercase lg:text-lg text-sm text-black">
+        <span className="rounded-sm lowercase bg-red-500 px-4 py-[3px]">
               {tickets?.status}
             </span>
           </div>

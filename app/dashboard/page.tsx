@@ -32,9 +32,9 @@ export default async function Dashboard() {
 
   return tickets.length != 0 ? (
     <div className="px-6  text-black">
-      <h1 className="flex w-full justify-between bg-transparent pb-7 pt-[38px]">
+      <h1 className="lg:flex w-full lg:justify-between  bg-transparent pb-7 pt-[38px]">
         <span className="text-4xl font-bold">Chamados</span>
-        <div className="flex gap-2 items-center justify-center">
+        <div className="flex  gap-2 items-center lg:justify-center">
           <Link href={"dashboard/new-ticket"}>
             <button className="rounded-sm bg-blue-500 px-8 py-[6px] font-medium leading-[150%] text-white transition-all duration-300 hover:bg-blue-400 hover:cursor-pointer">
               Cadastrar
