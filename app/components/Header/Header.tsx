@@ -18,7 +18,7 @@ export function Header() {
   return (
     <div className="text-black  bg-white border-[1px] border-slate-100 flex justify-between px-4  py-5">
       {status === "unauthenticated" && (
-         <Link href={"/"}>
+        <Link href={"/"}>
           <div
             className="font-bold text-2xl leading-relaxed
 "
@@ -57,7 +57,7 @@ export function Header() {
       )}
       {status === "authenticated" && (
         <div className="flex gap-5 items-center text-[#475569]">
-          <Link href={"/dashboard"}>
+          <Link href={"/profile"}>
             {" "}
             <div className="cursor-pointer  hover:text-blue-600 transition duration-300">
               <User size={24} />
